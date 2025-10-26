@@ -28,36 +28,30 @@ public class Libreria{
         listaLibros.insertarFinal(libro);
     }
 
-    public void obtenerLibros(){
-       
-
+    public Lista obtenerLibros(){
+        return listaLibros;
     }
 
-    public void agregarLibroCola(){
-
-        
-
+    public boolean agregarLibroCola(Libro libro){
+        colaLibros.encolar(libro);
+        return true;
     }
 
-    public void obtenerLibroCola(){
-
-       
-        
-
+    public Libro obtenerLibroCola(){
+        return colaLibros.obtenerFrente();
     }
-    public voic obtenerLibroPila(){
-        
-
-
+    public Libro obtenerLibroPila(){
+        return pilaLibrosEliminados.obtenerTope();
     }
 
-    public void crearLibro(){
-        
+    public Libro crearLibro(String titulo, String autor, String isbn){
+        Libro libro = new Libro(titulo, autor, isbn);
+        return libro;
     }
 
-    public void crearPedido(){
-        
-
+    public Pedido crearPedido(Libro libro, Fecha fecha){
+        Pedido pedido = new Pedido(libro, fecha);
+        return pedido;
     }
 
     public void devolverLibro() {
