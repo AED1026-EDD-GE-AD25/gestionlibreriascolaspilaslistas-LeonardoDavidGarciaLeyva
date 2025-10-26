@@ -203,5 +203,40 @@ public class ListaDoble<T>{
         return false;
     }
     
-    
+    // Métodos adaptadores para compatibilidad con Libreria/tests
+    public void insertarFinal(T valor){
+        agregar(valor);
+    }
+
+    public T obtenerUltimo(){
+        if (esVacia()) return null;
+        Nodo<T> aux = cabeza;
+        while (aux.getSiguiente() != null) {
+            aux = aux.getSiguiente();
+        }
+        return aux.getValor();
+    }
+
+    public void eliminarUltimo(){
+        if (esVacia()) return;
+        if (cabeza.getSiguiente() == null) {
+            cabeza = null;
+            tamanio = 0;
+            return;
+        }
+        Nodo<T> aux = cabeza;
+        while (aux.getSiguiente().getSiguiente() != null) {
+            aux = aux.getSiguiente();
+        }
+        aux.setSiguiente(null);
+        tamanio--;
+    }
+
+    public T obtenerElemento(int pos){
+        try {
+            return getValor(pos);
+        } catch (PosicionIlegalException e) {
+            return null;
+        }
+    }
 }

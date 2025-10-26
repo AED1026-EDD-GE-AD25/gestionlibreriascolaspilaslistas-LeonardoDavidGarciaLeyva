@@ -28,7 +28,7 @@ public class Libreria{
         listaLibros.insertarFinal(libro);
     }
 
-    public Lista obtenerLibros(){
+    public ListaDoble obtenerLibros(){
         return listaLibros;
     }
 
@@ -76,19 +76,15 @@ public class Libreria{
             listaLibros.eliminarUltimo();
             pilaLibrosEliminados.apilar(libroEliminado);
             return libroEliminado;
-        } catch (PosicionIlegalException e) {
+        } catch (Exception e) {
             return null;
         }
     }
 
     public void mostrarLibrosLista(){
-        try {
-            for (int i = 1; i <= listaLibros.getTamanio(); i++) {
-                Libro libro = listaLibros.obtenerElemento(i);
-                System.out.println("Libro " + i + ": " + libro.getTitulo() + " - " + libro.getAutor() + " - " + libro.getIsbn());
-            }
-        } catch (PosicionIlegalException e) {
-            System.out.println("Error al mostrar los libros: " + e.getMessage());
+        for (int i = 1; i <= listaLibros.getTamanio(); i++) {
+            Libro libro = listaLibros.obtenerElemento(i);
+            System.out.println("Libro " + i + ": " + libro.getTitulo() + " - " + libro.getAutor() + " - " + libro.getIsbn());
         }
     }
 
@@ -106,15 +102,11 @@ public class Libreria{
         if (isbn == null) {
             return null;
         }
-        try {
-            for (int i = 1; i <= listaLibros.getTamanio(); i++) {
-                Libro libro = listaLibros.obtenerElemento(i);
-                if (libro != null && isbn.equals(libro.getIsbn())) {
-                    return libro;
-                }
+        for (int i = 1; i <= listaLibros.getTamanio(); i++) {
+            Libro libro = listaLibros.obtenerElemento(i);
+            if (libro != null && isbn.equals(libro.getIsbn())) {
+                return libro;
             }
-        } catch (PosicionIlegalException e) {
-            System.out.println("Error al buscar el libro: " + e.getMessage());
         }
         return null;
     }
