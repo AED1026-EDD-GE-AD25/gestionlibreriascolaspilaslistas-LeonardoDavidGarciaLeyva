@@ -27,10 +27,14 @@ public class MenuOpciones {
         System.out.println("Libro agregado exitosamente.");
     }
     
-    public static void mostrarLibros() throws PosicionIlegalException {
-        System.out.println("\nLibros en la libreria:");
-        System.out.println("----------------------");
-        libreria.mostrarLibrosLista();
+    public static void mostrarLibros() {
+        try {
+            System.out.println("\nLibros en la librería:");
+            System.out.println("----------------------");
+            libreria.mostrarLibrosLista();
+        } catch (Exception e) {
+            System.out.println("Error al mostrar la lista de libros: " + e.getMessage());
+        }
     }
 
     public static void agregarLibroCola() {
@@ -61,15 +65,28 @@ public class MenuOpciones {
 
     public static void mostrarReservaLibros() {
         Cola<Libro> cola = libreria.mostrarReservaLibros();
-        if (cola != null) {
-            System.out.println("\nLibros en cola de reserva:");
-            System.out.println("-------------------------");
-            Libro libro;
-            while ((libro = libreria.obtenerLibroCola()) != null) {
-                System.out.println(libro.getTitulo() + " - " + libro.getAutor());
-            }
-        } else {
+        if (cola == null || cola.esVacia()) {
             System.out.println("No hay libros en reserva.");
+            return;
+        }
+
+        System.out.println("\nLibros en cola de reserva:");
+        System.out.println("-------------------------");
+        
+        // Crear una cola temporal para no perder los elementos
+        Cola<Libro> colaTemp = new Cola<>();
+        Libro libro;
+        
+        while ((libro = cola.obtenerFrente()) != null) {
+            System.out.println(libro.getTitulo() + " - " + libro.getAutor());
+            cola.desencolar();
+            colaTemp.encolar(libro);
+        }
+        
+        // Restaurar la cola original
+        while ((libro = colaTemp.obtenerFrente()) != null) {
+            cola.encolar(libro);
+            colaTemp.desencolar();
         }
     }
 

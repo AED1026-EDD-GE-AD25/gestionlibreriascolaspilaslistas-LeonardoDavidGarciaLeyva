@@ -82,9 +82,20 @@ public class Libreria{
     }
 
     public void mostrarLibrosLista(){
-        for (int i = 1; i <= listaLibros.getTamanio(); i++) {
-            Libro libro = listaLibros.obtenerElemento(i);
-            System.out.println("Libro " + i + ": " + libro.getTitulo() + " - " + libro.getAutor() + " - " + libro.getIsbn());
+        if (listaLibros.getTamanio() == 0) {
+            System.out.println("No hay libros en la lista.");
+            return;
+        }
+        
+        for (int i = 0; i < listaLibros.getTamanio(); i++) {
+            try {
+                Libro libro = listaLibros.obtenerElemento(i);
+                if (libro != null) {
+                    System.out.println("Libro " + (i+1) + ": " + libro.getTitulo() + " - " + libro.getAutor() + " - " + libro.getIsbn());
+                }
+            } catch (Exception e) {
+                System.out.println("Error al mostrar libro en posición " + (i+1));
+            }
         }
     }
 
