@@ -11,7 +11,6 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    //just getters
     public String getTitulo() {
         return titulo;
     }
