@@ -90,8 +90,24 @@ public class ListaDoble<T>{
      */
 
     public T remover(int pos) throws PosicionIlegalException{
-        
-        
+        if(pos >= 0 && pos < tamanio){
+            T valor;
+            if(pos == 0){
+                valor = cabeza.getValor();
+                cabeza = cabeza.getSiguiente();
+            }else{
+                Nodo<T> aux = cabeza;
+                for(int i = 0; i < pos-1; i++){
+                    aux = aux.getSiguiente();
+                }
+                valor = aux.getSiguiente().getValor();
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+            }
+            tamanio--;
+            return valor;
+        }else{
+            throw new PosicionIlegalException();
+        }
     }
      /*
      * Elimina un nodo que contiene un T valor
@@ -109,9 +125,24 @@ public class ListaDoble<T>{
 
       */
      public int remover(T valor) throws PosicionIlegalException{
-        
-       
-        
+        Nodo<T> aux = cabeza;
+        Nodo<T> prev = null;
+        int pos = 0;
+        while (aux != null) {
+            if (aux.getValor().equals(valor)) {
+                if (prev == null) {
+                    cabeza = aux.getSiguiente();
+                } else {
+                    prev.setSiguiente(aux.getSiguiente());
+                }
+                tamanio--;
+                return pos;
+            }
+            prev = aux;
+            aux = aux.getSiguiente();
+            pos++;
+        }
+        return -1;
     }
 
     /*
@@ -153,7 +184,7 @@ public class ListaDoble<T>{
 
     @Override
     public String toString() {
-       
+       return "ListaDoble [cabeza=" + cabeza + ", tamanio=" + tamanio + "]";
 
     }
     /*
@@ -162,7 +193,14 @@ public class ListaDoble<T>{
      * si no regresa false
      */
     public boolean contiene(T valor){
-        
+        Nodo<T> aux = cabeza;
+        while (aux != null) {
+            if (aux.getValor().equals(valor)) {
+                return true;
+            }
+            aux = aux.getSiguiente();
+        }
+        return false;
     }
     
     

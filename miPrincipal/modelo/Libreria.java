@@ -22,14 +22,12 @@ public class Libreria{
         colaLibros = new Cola<>();
         pilaLibrosEliminados = new Pila<>();
 
+    }  
+    
+    public void agregarLibro(Libro libro){
+        listaLibros.insertarFinal(libro);
     }
-
-    public void agregarLibro(){
-        
-           
-        
-    }
-
+    //finish this method
     public void obtenerLibros(){
        
 
