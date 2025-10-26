@@ -49,4 +49,9 @@ public class Cola<T> {
         else
             return null;
     }
+
+    // Adaptador requerido por libreria/tests
+    public T frente() {
+        return obtenerFrente();
+    }
 }

@@ -74,6 +74,17 @@ public class Pila<T> {
     }
     
     //coinciden
-    
 
+    // Métodos adaptadores para compatibilidad con Libreria/tests
+    public T obtenerTope() {
+        return cima();
+    }
+
+    public boolean estaVacia() {
+        return esVacia();
+    }
+
+    public void desapilar() {
+        retirar();
+    }
 }

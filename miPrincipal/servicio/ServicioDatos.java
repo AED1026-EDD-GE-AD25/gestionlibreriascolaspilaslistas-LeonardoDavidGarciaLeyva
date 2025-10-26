@@ -17,8 +17,7 @@ public class ServicioDatos{
         cola = new Cola<>();
         pila = new Pila<>();
     }
-
-    // Métodos para la lista
+  
     public void agregarALista(Libro valor) {
         lista.agregar(valor);
     }
@@ -27,34 +26,27 @@ public class ServicioDatos{
         return lista.getValor(indice);
     }
 
-    // Métodos para la cola
     public void agregarACola(Libro valor) {
         cola.encolar(valor);
     }
 
     public Libro obtenerDeCola() {
-        return cola.frente();
-  
+        return cola.obtenerFrente();
     }
 
     public void removerDeCola() {
         cola.desencolar();
-        
     }
 
-    // Métodos para la pila
     public void agregarAPila(Libro valor) {
         pila.apilar(valor);
-        
     }
 
     public Libro obtenerDePila() {
         return pila.cima();
-        
     }
 
     public void removerDePila() {
         pila.retirar();
-    
     }
 }
