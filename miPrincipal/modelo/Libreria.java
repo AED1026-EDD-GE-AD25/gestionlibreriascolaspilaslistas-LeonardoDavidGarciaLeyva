@@ -58,16 +58,22 @@ public class Libreria{
         return pedido;
     }
 
-    public Boolean devolverLibro(Libro libro){
+    public Boolean devolverLibro(Libro libro) {
         if (libro == null) {
             return false;
         }
-        try {
-            listaLibros.insertarFinal(libro);
-            return true;
-        } catch (Exception e) {
-            return false;
+
+        // Verificar si el libro está en la pila de eliminados
+        if (!pilaLibrosEliminados.esVacia()) {
+            Libro libroEliminado = pilaLibrosEliminados.cima();
+            if (libroEliminado != null && libroEliminado.getIsbn().equals(libro.getIsbn())) {
+                pilaLibrosEliminados.retirar();
+                listaLibros.insertarFinal(libro);
+                return true;
+            }
         }
+        
+        return false;  // El libro no estaba en la pila de eliminados
     }
 
     public Libro eliminarUltimoLibro(){
