@@ -58,22 +58,18 @@ public class Libreria{
         return pedido;
     }
 
-    public Boolean devolverLibro(Libro libro) {
-        if (libro == null) {
-            return false;
-        }
-
-        // Verificar si el libro está en la pila de eliminados
-        if (!pilaLibrosEliminados.esVacia()) {
-            Libro libroEliminado = pilaLibrosEliminados.cima();
-            if (libroEliminado != null && libroEliminado.getIsbn().equals(libro.getIsbn())) {
-                pilaLibrosEliminados.retirar();
-                listaLibros.insertarFinal(libro);
+    public boolean devolverLibro(Libro libro) {
+        try {
+            int posEliminada = listaLibros.remover(libro); 
+            if (posEliminada != -1) {
+                pilaLibrosEliminados.apilar(libro);
+                System.out.println("se devolvio el libro : " + libro.getTitulo());
                 return true;
             }
+            return false;
+        } catch (PosicionIlegalException e) {
+            return false;
         }
-        
-        return false;  // El libro no estaba en la pila de eliminados
     }
 
     public Libro eliminarUltimoLibro(){
